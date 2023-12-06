@@ -1,0 +1,8 @@
+{
+  "name": "EjeUno",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "4e1e63ef"
+}
