@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #columnA {
+      order: 2; 
+    }
+  
+    #columnB {
+      order: 1;
+    }
+  }

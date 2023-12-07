@@ -1,0 +1,9 @@
+ion-card {
+ 
+  background-color: lightblue;
+
+
+  @media (max-width: 400px) {
+    background-color: lightcoral; 
+  }
+}

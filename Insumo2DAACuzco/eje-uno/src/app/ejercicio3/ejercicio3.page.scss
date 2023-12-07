@@ -1,0 +1,18 @@
+
+ion-content {
+    p {
+      font-size: 18px;
+    }
+  
+    img {
+        height: 50%;
+      max-width: 100%; 
+      height: auto; 
+    }
+  
+    @media only screen and (max-width: 500px) {
+      img {
+        display: none;
+      }
+    }
+  }
