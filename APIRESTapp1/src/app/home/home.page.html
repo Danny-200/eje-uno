@@ -1,117 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      PoKeDeX
-    </ion-title>
+    <ion-title>PoKeDeX</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<!-- ion-content: Contenido principal de la aplicación -->
-
 <ion-content>
-
-<!-- Bloque para ingresar el ID del Pokémon -->
   <ion-item>
-    <ion-label position="floating">ID del Pokémon</ion-label>
-    <ion-input type="number" [(ngModel)]="pokemonID"></ion-input>
-  </ion-item> 
-
-<!-- Botón para obtener datos del Pokémon por ID -->
-  <ion-button (click)="getPokemonDataID(pokemonID)">Mostrar Pokémon por ID</ion-button>
-  
-<!-- ion-card: Tarjeta para mostrar información del Pokémon por ID -->
-  <ion-card *ngIf="pokemonNameID || pokemonImageID">
-    <ion-card-header>
-      {{ pokemonNameID }}
-    </ion-card-header>
-    <ion-card-content>
-      <img [src]="pokemonImageID" alt="Pokemon Image" *ngIf="pokemonImageID">
-    </ion-card-content>
-  </ion-card>
-</ion-content>
-
-
-
-<!-- Segundo bloque ion-content para ingresar el Nombre del Pokémon -->
-<ion-content>
-
-<!-- Botón para obtener datos del Pokémon por Nombre -->
-<ion-item>
-    <ion-label position="floating">Nombre del Pokémon</ion-label>
-    <ion-input type="string" [(ngModel)]="pokemonName"></ion-input>
+    <ion-label position="floating">Nombre o ID del Pokémon</ion-label>
+    <ion-input type="text" [(ngModel)]="pokemonQuery"></ion-input>
   </ion-item>
-  <ion-button (click)="getPokemonDataName(pokemonName)">Mostrar Pokémon por Nombre</ion-button>
-  
-<!-- ion-card: Tarjeta para mostrar información del Pokémon por Nombre -->
-  <ion-card *ngIf="pokemonIDName || pokemonImageName">
+  <ion-button (click)="getPokemonData(pokemonQuery)">Buscar Pokémon</ion-button>
+  <ion-card *ngIf="pokemonName || pokemonImage">
     <ion-card-header>
-      {{ pokemonIDName }}
+      {{ pokemonName }}
     </ion-card-header>
     <ion-card-content>
-      <img [src]="pokemonImageName" alt="Pokemon Image" *ngIf="pokemonImageName">
+      <img [src]="pokemonImage" alt="Pokemon Image" *ngIf="pokemonImage">
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<ion-content>
-
-  <!-- Bloque para ingresar el ID del Pokémon -->
-    <ion-item>
-      <ion-label position="floating">ID del Objeto Pokémon</ion-label>
-      <ion-input type="number" [(ngModel)]="pokemonID2"></ion-input>
-    </ion-item> 
-  
-  <!-- Botón para obtener datos del Pokémon por ID -->
-    <ion-button (click)="getItemDataID(pokemonID2)">Mostrar Objeto Pokémon por ID</ion-button>
-    
-  <!-- ion-card: Tarjeta para mostrar información del Pokémon por ID -->
-    <ion-card *ngIf="pokemonNameID2 || pokemonImageID2">
-      <ion-card-header>
-        {{ pokemonNameID2 }}
-      </ion-card-header>
-      <ion-card-content>
-        <img [src]="pokemonImageID2" alt="Item Image" *ngIf="pokemonImageID2">
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
-
-  
-
-
-
-  <!-- Segundo bloque ion-content para ingresar el Nombre del Pokémon -->
-<ion-content>
-
-  <!-- Botón para obtener datos del Pokémon por Nombre -->
-  <ion-item>
-      <ion-label position="floating">Nombre del Objeto Pokémon</ion-label>
-      <ion-input type="string" [(ngModel)]="pokemonName2"></ion-input>
-    </ion-item>
-    <ion-button (click)="getItemDataName(pokemonName2)">Mostrar Objeto Pokémon por Nombre</ion-button>
-    
-  <!-- ion-card: Tarjeta para mostrar información del Pokémon por Nombre -->
-    <ion-card *ngIf="pokemonIDName2 || pokemonImageName2">
-      <ion-card-header>
-        {{ pokemonIDName2 }}
-      </ion-card-header>
-      <ion-card-content>
-        <img [src]="pokemonImageName2" alt="Item Image" *ngIf="pokemonImageName2">
-      </ion-card-content>
-    </ion-card>
-  </ion-content>

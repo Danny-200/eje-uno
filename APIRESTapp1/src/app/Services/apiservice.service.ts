@@ -1,7 +1,17 @@
-// Importa los módulos necesarios de Angular
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PokemonData } from '../models/pokemon.model';
+import firebase from 'firebase/compat/app'; 
+import 'firebase/compat/firestore'; 
+import { environment } from 'src/environments/environment';
+
+
+firebase.initializeApp(environment.firebaseConfig);
+
+const db = firebase.firestore();
+const pokemonTypesCollection = db.collection('pokemonTypes');
 
 @Injectable({
   providedIn: 'root'
@@ -9,33 +19,28 @@ import { Observable } from 'rxjs';
 export class APIServiceService {
   private apiUrl = 'https://pokeapi.co/api/v2/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }//private afs: AngularFirestore
 
-  getPokemonID(id: number): Observable<any> {
-    return this.http.get(this.apiUrl + "pokemon/" + id);
+  getPokemon(query: string): Observable<PokemonData> {
+    const url = `${this.apiUrl}pokemon/${query}`;
+    return this.http.get<PokemonData>(url).pipe(
+      map(response => {
+ const types = response.types.map(type => ({ type: type.type }));
+ const pokemonTypes = types.map(t => t.type.name); // Obtener todos los tipos
+ this.savePokemonTypesToFirestore(pokemonTypes);
+ return { ...response, types };
+      })
+    );
   }
 
-  getPokemonName(name: string): Observable<any> {
-    return this.http.get(this.apiUrl + "pokemon/" + name);
+  private savePokemonTypesToFirestore(pokemonTypes: string[]) {
+    pokemonTypesCollection.doc('Pokemon').set({ types: pokemonTypes })
+      .then(() => {
+        console.log('Tipos de Pokémon guardados exitosamente');
+      })
+      .catch((error) => {
+        console.error('Error al guardar los tipos de Pokémon: ', error);
+      });
   }
-
-
-
-  
-
-
-
-getItemID(id2: number): Observable<any> {
-  return this.http.get(this.apiUrl + "item/" + id2);
-}
-
-
- 
-getItemName(name2: string): Observable<any> {
-  return this.http.get(this.apiUrl + "item/" + name2);
-
-
-
-}
 
 }
